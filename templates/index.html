@@ -57,6 +57,45 @@
         margin-top: 20px;
     }
 </style>
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        function listing() {
+            $.ajax({
+                type: 'GET',
+                url: '/index',
+                data: {},
+                success: function (response) {
+                    let rows = response['Stores']
+                    for (let i = 0; i < rows.length; i++) {
+                        let store = rows[i]
+                        let storename = rows[i]['StoreName']
+                        let address = rows[i]['Adress']
+                        let star = rows[i]['StorePoint']
+                        let image = rows[i]['thumnail']
+
+                        let temp_html = `<div class="col">
+                                            <a href="/detail/${store['Num']}"><div class="card h-100">
+                                                <img src="${image}"
+                                                     class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${storename}</h5>
+
+                                                    <p>${star}</p>
+                                                    <p class="mycomment">${address}</p>
+                                                </div>
+                                            </div></a>
+                                        </div>`
+
+                        $('#cards-box').append(temp_html)
+                    }
+                }
+            })
+        }
+
+    </script>
 <body>
 <div class="nav">
     <a><h3 class="logo" onclick="window.location.href='/'">맛집NOW</h3></a>
@@ -66,42 +105,10 @@
 <div class="cover">
     <p>이미지안의 글</p>
 </div>
-<div class="filter">
-    <div class="card mb-3" style="width: 540px; margin: auto;">
-        <a onclick="window.location.href='/detail'">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://www.eatthis.com/wp-content/uploads/sites/4/2019/06/deep-dish-pizza-chicago.jpg"
-                         class="img-fluid rounded-start">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title" id="title">상호명1</h5>
-                        <p class="card-text" id="desc">간단 설명</p>
-                        <p class="card-text" id="address"><small class="text-muted">주소</small></p>
-                        <p id="star">별</p>
-                    </div>
-                </div>
-            </div>
-        </a>
+<div class="filter"></div>
+<div class="mycards">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
     </div>
-    <div class="card mb-3" style="width: 540px; margin: auto;">
-        <a onclick="window.location.href='/detail'">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://static01.nyt.com/images/2021/02/17/dining/17tootired-grilled-cheese/17tootired-grilled-cheese-articleLarge.jpg?quality=75&auto=webp&disable=upscale"
-                         class="img-fluid rounded-start">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title" id="title">상호명2</h5>
-                        <p class="card-text" id="desc">간단 설명</p>
-                        <p class="card-text" id="address"><small class="text-muted">주소</small></p>
-                        <p id="star">별</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
+</div>
 </body>
 </html>

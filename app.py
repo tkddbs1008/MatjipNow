@@ -12,9 +12,8 @@ app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
 SECRET_KEY = 'SPARTA'
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.wqyes.mongodb.net/Cluster0?retryWrites=true&w=majority')
-db = client.dbsparta
-
+client = MongoClient('mongodb+srv://test:sparta@cluster0.07mbu.mongodb.net/Cluster0?retryWrites=true&w=majority')
+db = client.dbStore
 
 @app.route('/')
 def home():
@@ -28,6 +27,11 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+@app.route("/index", methods=["GET"])
+def store_get():
+    store_list = list(db.Store.find({}, {'_id': False}))
+    return jsonify({'result': 'success', 'Stores': store_list})
+
 @app.route('/detail')
 def detail():
     token_receive = request.cookies.get('mytoken')
@@ -35,6 +39,18 @@ def detail():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"username": payload["id"]})
         return render_template('detail.html', user_info=user_info)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
+
+@app.route('/detail/<idNum>')
+def store(idNum):
+    # 각 상세페이지를 보게 한다
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"username": payload["id"]})
+        store_info = db.Store.find_one({"Num": idNum}, {"_id": False})
+        return render_template('detail.html', user_info=user_info, store_info=store_info)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
@@ -146,12 +162,14 @@ def posting():
         user_info = db.users.find_one({"username": payload["id"]})
         comment_receive = request.form["comment_give"]
         date_receive = request.form["date_give"]
+        num_receive = request.form["num_give"]
         doc = {
             "username": user_info["username"],
             "profile_name": user_info["profile_name"],
             "profile_pic_real": user_info["profile_pic_real"],
             "comment": comment_receive,
-            "date": date_receive
+            "date": date_receive,
+            "Id": num_receive
         }
         db.posts.insert_one(doc)
         return jsonify({"result": "success", 'msg': '포스팅 성공'})

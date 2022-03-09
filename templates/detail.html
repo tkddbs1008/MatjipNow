@@ -36,7 +36,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="{{ url_for('static', filename='myjs.js') }}"></script>
-
 </head>
 <body>
 <div class="nav">
@@ -44,25 +43,9 @@
     <button type="button" class="btn btn-outline-light" onclick="logout()">Log out</button>
     <h6 class="subtitle" style="color: white">{{ user_info.username }} 님, 안녕하세요~</h6>
 </div>
-
-<div class="card mb-3" style="max-width: 1200px; margin: auto">
-  <div class="row g-0">
-    <div class="col-md-4" style="width: 600px; height: 500px;">
-      <img src="..." class="img-fluid rounded-start" alt="...">
+<div class="mycards">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
     </div>
-    <div class="col-md-8" style="max-width: 400px;">
-        <div class="card-body">
-            <h2 class="card-title" id="title" style="font-size: 35px;">대충 좋은 상호명</h2>
-            <p class="card-text">별</p>
-            <p class="card-text">설명</p>
-            <p class="card-text">메뉴</p>
-            <p><small class="text-muted">주소</small></p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="map" style="z-index: 2">
-
 </div>
 <section class="section">
     <article class="media">
