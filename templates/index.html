@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Webpage Title -->
+    <title>HOME | 맛집NOW</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Google Font CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+
+    <!-- importing CSS stylesheet -->
+    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+
+</head>
+<style>
+    .cover {
+        background-color: gray;
+        height: 300px;
+        margin-top: 0px;
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://wallpapersmug.com/download/1920x1080/ddcbbf/food-pizza-baking.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .filter {
+        background-color: aquamarine;
+        width: 1000px;
+        height: 300px;
+        margin: auto;
+        margin-top: 20px;
+    }
+</style>
+<body>
+<div class="nav">
+    <a><h3 class="logo" onclick="window.location.href='/'">맛집NOW</h3></a>
+    <button type="button" class="btn btn-outline-light" onclick="logout()">Log out</button>
+    <h6 class="subtitle" style="color: white">{{ user_info.username }} 님, 안녕하세요~</h6>
+</div>
+<div class="cover">
+    <p>이미지안의 글</p>
+</div>
+<div class="filter">
+    <div class="card mb-3" style="width: 540px; margin: auto;">
+        <a onclick="window.location.href='/detail'">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://www.eatthis.com/wp-content/uploads/sites/4/2019/06/deep-dish-pizza-chicago.jpg"
+                         class="img-fluid rounded-start">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" id="title">상호명1</h5>
+                        <p class="card-text" id="desc">간단 설명</p>
+                        <p class="card-text" id="address"><small class="text-muted">주소</small></p>
+                        <p id="star">별</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="card mb-3" style="width: 540px; margin: auto;">
+        <a onclick="window.location.href='/detail'">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://static01.nyt.com/images/2021/02/17/dining/17tootired-grilled-cheese/17tootired-grilled-cheese-articleLarge.jpg?quality=75&auto=webp&disable=upscale"
+                         class="img-fluid rounded-start">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" id="title">상호명2</h5>
+                        <p class="card-text" id="desc">간단 설명</p>
+                        <p class="card-text" id="address"><small class="text-muted">주소</small></p>
+                        <p id="star">별</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</body>
+</html>
