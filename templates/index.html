@@ -60,6 +60,8 @@
 <script>
     var local = ''
     var category = ''
+    var tag1_local = true //지역 태그 : true일때 눌르는선택 false면 아무것도 선택 X
+    var tag2_category = true //메뉴 태그 : true일때 눌르는선택 false면 아무것도 선택 X
 
     function tag1(c) {
         // let local_keyword = $('#button1').val();
@@ -95,7 +97,203 @@
 
         }
     }
+    function testremove(c) {
+            if (tag1_local == true) {
+                if (c == '강남') {
+                    console.log('강남 클릭')
+                    $('#button1').remove();
+                    $('#button2').remove();
+                    $('#button3').remove();
+                    $('#button4').remove();
+                    $('#button5').remove();
+                    $('#button6').remove();
+                    let temp_html = `<a class="btn btn-danger" onclick="testremove('강남')" href="#" role="button" id="button1">#강남</a>
+                            <a class="btn btn-primary" onclick="testremove('홍대')" href="#" role="button" id="button2">#홍대</a>
+                            <a class="btn btn-primary" onclick="testremove('건대')" href="#" role="button" id="button3">#건대</a>
+                            <a class="btn btn-primary" onclick="testremove('종로')" href="#" role="button" id="button4">#종로</a>
+                            <a class="btn btn-primary" onclick="testremove('신림')" href="#" role="button" id="button5">#신림</a>
+                            <a class="btn btn-primary" onclick="testremove('노원')" href="#" role="button" id="button6">#노원</a> `
+                    $('#local_tag_1').append(temp_html)
+                    tag1_local = false
+                    tag1(c)
+                } else if (c == '홍대') {
+                    console.log('홍대 클릭')
+                    $('#button1').remove();
+                    $('#button2').remove();
+                    $('#button3').remove();
+                    $('#button4').remove();
+                    $('#button5').remove();
+                    $('#button6').remove();
+                    let temp_html = `<a class="btn btn-primary" onclick="testremove('강남')" href="#" role="button" id="button1">#강남</a>
+                            <a class="btn btn-danger" onclick="testremove('홍대')" href="#" role="button" id="button2">#홍대</a>
+                            <a class="btn btn-primary" onclick="testremove('건대')" href="#" role="button" id="button3">#건대</a>
+                            <a class="btn btn-primary" onclick="testremove('종로')" href="#" role="button" id="button4">#종로</a>
+                            <a class="btn btn-primary" onclick="testremove('신림')" href="#" role="button" id="button5">#신림</a>
+                            <a class="btn btn-primary" onclick="testremove('노원')" href="#" role="button" id="button6">#노원</a> `
+                    $('#local_tag_1').append(temp_html)
+                    tag1_local = false
+                    tag1(c)
+                } else if (c == '건대') {
+                    console.log('건대 클릭')
+                    $('#button1').remove();
+                    $('#button2').remove();
+                    $('#button3').remove();
+                    $('#button4').remove();
+                    $('#button5').remove();
+                    $('#button6').remove();
+                    let temp_html = `<a class="btn btn-primary" onclick="testremove('강남')" href="#" role="button" id="button1">#강남</a>
+                            <a class="btn btn-primary" onclick="testremove('홍대')" href="#" role="button" id="button2">#홍대</a>
+                            <a class="btn btn-danger" onclick="testremove('건대')" href="#" role="button" id="button3">#건대</a>
+                            <a class="btn btn-primary" onclick="testremove('종로')" href="#" role="button" id="button4">#종로</a>
+                            <a class="btn btn-primary" onclick="testremove('신림')" href="#" role="button" id="button5">#신림</a>
+                            <a class="btn btn-primary" onclick="testremove('노원')" href="#" role="button" id="button6">#노원</a> `
+                    $('#local_tag_1').append(temp_html)
+                    tag1_local = false
+                    tag1(c)
+                } else if (c == '종로') {
+                    console.log('종로 클릭')
+                    $('#button1').remove();
+                    $('#button2').remove();
+                    $('#button3').remove();
+                    $('#button4').remove();
+                    $('#button5').remove();
+                    $('#button6').remove();
+                    let temp_html = `<a class="btn btn-primary" onclick="testremove('강남')" href="#" role="button" id="button1">#강남</a>
+                            <a class="btn btn-primary" onclick="testremove('홍대')" href="#" role="button" id="button2">#홍대</a>
+                            <a class="btn btn-primary" onclick="testremove('건대')" href="#" role="button" id="button3">#건대</a>
+                            <a class="btn btn-danger" onclick="testremove('종로')" href="#" role="button" id="button4">#종로</a>
+                            <a class="btn btn-primary" onclick="testremove('신림')" href="#" role="button" id="button5">#신림</a>
+                            <a class="btn btn-primary" onclick="testremove('노원')" href="#" role="button" id="button6">#노원</a> `
+                    $('#local_tag_1').append(temp_html)
+                    tag1_local = false
+                    tag1(c)
+                } else if (c == '신림') {
+                    console.log('신림 클릭')
+                    $('#button1').remove();
+                    $('#button2').remove();
+                    $('#button3').remove();
+                    $('#button4').remove();
+                    $('#button5').remove();
+                    $('#button6').remove();
+                    let temp_html = `<a class="btn btn-primary" onclick="testremove('강남')" href="#" role="button" id="button1">#강남</a>
+                            <a class="btn btn-primary" onclick="testremove('홍대')" href="#" role="button" id="button2">#홍대</a>
+                            <a class="btn btn-primary" onclick="testremove('건대')" href="#" role="button" id="button3">#건대</a>
+                            <a class="btn btn-primary" onclick="testremove('종로')" href="#" role="button" id="button4">#종로</a>
+                            <a class="btn btn-danger" onclick="testremove('신림')" href="#" role="button" id="button5">#신림</a>
+                            <a class="btn btn-primary" onclick="testremove('노원')" href="#" role="button" id="button6">#노원</a> `
+                    $('#local_tag_1').append(temp_html)
+                    tag1_local = false
+                    tag1(c)
+                } else if (c == '노원') {
+                    console.log('노원 클릭')
+                    $('#button1').remove();
+                    $('#button2').remove();
+                    $('#button3').remove();
+                    $('#button4').remove();
+                    $('#button5').remove();
+                    $('#button6').remove();
+                    let temp_html = `<a class="btn btn-primary" onclick="testremove('강남')" href="#" role="button" id="button1">#강남</a>
+                            <a class="btn btn-primary" onclick="testremove('홍대')" href="#" role="button" id="button2">#홍대</a>
+                            <a class="btn btn-primary" onclick="testremove('건대')" href="#" role="button" id="button3">#건대</a>
+                            <a class="btn btn-primary" onclick="testremove('종로')" href="#" role="button" id="button4">#종로</a>
+                            <a class="btn btn-primary" onclick="testremove('신림')" href="#" role="button" id="button5">#신림</a>
+                            <a class="btn btn-danger" onclick="testremove('노원')" href="#" role="button" id="button6">#노원</a> `
+                    $('#local_tag_1').append(temp_html)
+                    tag1_local = false
+                    tag1(c)
+                }
 
+
+            } else {
+
+                $('#button1').remove();
+                $('#button2').remove();
+                $('#button3').remove();
+                $('#button4').remove();
+                $('#button5').remove();
+                $('#button6').remove();
+                let temp_html = `<a class="btn btn-primary" onclick="testremove('강남')" href="#" role="button" id="button1">#강남</a>
+                            <a class="btn btn-primary" onclick="testremove('홍대')" href="#" role="button" id="button2">#홍대</a>
+                            <a class="btn btn-primary" onclick="testremove('건대')" href="#" role="button" id="button3">#건대</a>
+                            <a class="btn btn-primary" onclick="testremove('종로')" href="#" role="button" id="button4">#종로</a>
+                            <a class="btn btn-primary" onclick="testremove('신림')" href="#" role="button" id="button5">#신림</a>
+                            <a class="btn btn-primary" onclick="testremove('노원')" href="#" role="button" id="button6">#노원</a> `
+                $('#local_tag_1').append(temp_html)
+                tag1_local = true
+
+
+            }
+
+
+        }
+    function testremove_2(c) {
+            if (tag2_category == true) {
+                if (c == '한식') {
+                    $('#button7').remove();
+                    $('#button8').remove();
+                    $('#button9').remove();
+                    $('#button10').remove();
+                    let temp_html = `<a class="btn btn-danger" onclick="testremove_2('한식')" href="#" role="button" id="button7">#한식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('양식')" href="#" role="button" id="button8">#양식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('일식')" href="#" role="button" id="button9">#일식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('중식')" href="#" role="button" id="button10">#중식</a>`
+                    $('#category_tag').append(temp_html)
+                    tag2_category=false
+                    tag2(c)
+                } else if (c == '양식') {
+                    $('#button7').remove();
+                    $('#button8').remove();
+                    $('#button9').remove();
+                    $('#button10').remove();
+                    let temp_html = `<a class="btn btn-primary" onclick="testremove_2('한식')" href="#" role="button" id="button7">#한식</a>
+                            <a class="btn btn-danger" onclick="testremove_2('양식')" href="#" role="button" id="button8">#양식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('일식')" href="#" role="button" id="button9">#일식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('중식')" href="#" role="button" id="button10">#중식</a>`
+                    $('#category_tag').append(temp_html)
+                    tag2_category=false
+                    tag2(c)
+                } else if (c == '일식') {
+                    $('#button7').remove();
+                    $('#button8').remove();
+                    $('#button9').remove();
+                    $('#button10').remove();
+                    let temp_html = `<a class="btn btn-primary" onclick="testremove_2('한식')" href="#" role="button" id="button7">#한식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('양식')" href="#" role="button" id="button8">#양식</a>
+                            <a class="btn btn-danger" onclick="testremove_2('일식')" href="#" role="button" id="button9">#일식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('중식')" href="#" role="button" id="button10">#중식</a>`
+                    $('#category_tag').append(temp_html)
+                    tag2_category=false
+                    tag2(c)
+                } else if (c == '중식') {
+                    $('#button7').remove();
+                    $('#button8').remove();
+                    $('#button9').remove();
+                    $('#button10').remove();
+                    let temp_html = `<a class="btn btn-primary" onclick="testremove_2('한식')" href="#" role="button" id="button7">#한식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('양식')" href="#" role="button" id="button8">#양식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('일식')" href="#" role="button" id="button9">#일식</a>
+                            <a class="btn btn-danger" onclick="testremove_2('중식')" href="#" role="button" id="button10">#중식</a>`
+                    $('#category_tag').append(temp_html)
+                    tag2_category=false
+                    tag2(c)
+                }
+
+
+            } else {
+                $('#button7').remove();
+                $('#button8').remove();
+                $('#button9').remove();
+                $('#button10').remove();
+                let temp_html = `<a class="btn btn-primary" onclick="testremove_2('한식')" href="#" role="button" id="button7">#한식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('양식')" href="#" role="button" id="button8">#양식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('일식')" href="#" role="button" id="button9">#일식</a>
+                            <a class="btn btn-primary" onclick="testremove_2('중식')" href="#" role="button" id="button10">#중식</a>`
+                $('#category_tag').append(temp_html)
+                tag2_category=true
+
+            }
+
+        }
     function listing() {
         $.ajax({
             type: 'GET',
@@ -124,14 +322,17 @@
                                         </div>`
 
                     $('#cards-box').append(temp_html)
+
                 }
             }
         })
+
     }
 
     $(document).ready(function () {
         listing();
     });
+
 </script>
 <body>
 <div class="nav">
@@ -140,37 +341,36 @@
     <h6 class="subtitle" style="color: white">{{ user_info.username }} 님, 안녕하세요~</h6>
 </div>
 <div class="cover">
-    <p>이미지안의 글</p>
 </div>
-<h1>필터</h1>
+<h1 class="filter2">필터</h1>
 <div class="Set_filter">
     <div class="filter-item">
-        <label class="strong_tag">+지역</label>
-        <p class="local_tag">
+        <label class="strong_tag">지역</label>
+        <p class="local_tag" id="local_tag_1">
             <!--                    <a href="#" target="_self" role="button" aria-pressed="true">한식</a>-->
             <!--                    <input type="radio" id ="local01" name="local" >-->
-            <a class="btn btn-danger" onclick="tag1('강남')" href="#" role="button" id="button1">#강남</a>
-            <a class="btn btn-primary" onclick="tag1('홍대')" href="#" role="button" id="button2">#홍대</a>
-            <a class="btn btn-primary" onclick="tag1('건대')" href="#" role="button" id="button3">#건대</a>
-            <a class="btn btn-primary" onclick="tag1('종로')" href="#" role="button" id="button4">#종로</a>
-            <a class="btn btn-primary" onclick="tag1('신림')" href="#" role="button" id="button5">#신림</a>
-            <a class="btn btn-primary" onclick="tag1('노원')" href="#" role="button" id="button6">#노원</a>
+            <a class="btn btn-primary" onclick="testremove('강남')" href="#" role="button" id="button1">#강남</a>
+            <a class="btn btn-primary" onclick="testremove('홍대')" href="#" role="button" id="button2">#홍대</a>
+            <a class="btn btn-primary" onclick="testremove('건대')" href="#" role="button" id="button3">#건대</a>
+            <a class="btn btn-primary" onclick="testremove('종로')" href="#" role="button" id="button4">#종로</a>
+            <a class="btn btn-primary" onclick="testremove('신림')" href="#" role="button" id="button5">#신림</a>
+            <a class="btn btn-primary" onclick="testremove('노원')" href="#" role="button" id="button6">#노원</a>
         </p>
 
     </div>
     <div class="filter-item">
-        <label class="strong_tag">+지역</label>
-        <p class="local_tag">
+        <label class="strong_tag">음식 분류</label>
+        <p class="local_tag" id="category_tag">
             <!--                    <a href="#" target="_self" role="button" aria-pressed="true">한식</a>-->
-            <a class="btn btn-primary" onclick="tag2('한식')" href="#" role="button" id="button7">#한식</a>
-            <a class="btn btn-primary" onclick="tag2('양식')" href="#" role="button" id="button8">#양식</a>
-            <a class="btn btn-primary" onclick="tag2('일식')" href="#" role="button" id="button9">#일식</a>
-            <a class="btn btn-primary" onclick="tag2('중식')" href="#" role="button" id="button10">#중식</a>
+            <a class="btn btn-primary" onclick="testremove_2('한식')" href="#" role="button" id="button7">#한식</a>
+            <a class="btn btn-primary" onclick="testremove_2('양식')" href="#" role="button" id="button8">#양식</a>
+            <a class="btn btn-primary" onclick="testremove_2('일식')" href="#" role="button" id="button9">#일식</a>
+            <a class="btn btn-primary" onclick="testremove_2('중식')" href="#" role="button" id="button10">#중식</a>
         </p>
 
     </div>
 
-    <button id="search" onclick="search()">필터 적용</button>
+    <button id="search" type="button" class="btn btn-outline-dark" onclick="search()">필터 적용</button>
 </div>
 
 

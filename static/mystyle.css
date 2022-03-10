@@ -215,3 +215,23 @@ input::-webkit-calendar-picker-indicator {
     float: left;
 }
 
+.Set_filter {
+    text-align: center;
+    margin: 10px;
+}
+
+.filter2 {
+    text-align: center;
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+#search {
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+.strong_tag {
+    margin: 10px;
+    font-size: 15px;
+}
