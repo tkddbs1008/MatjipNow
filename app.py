@@ -129,7 +129,7 @@ def main_post():
     return jsonify({'result':'success','msg':'요청확인'})
 @app.route("/index", methods=["GET"])
 def store_get():
-    store_list = list(db.Store.find({}, {'_id': False}))
+    store_list = list(db.Store.find({}, {'_id': False}).sort("Num", -1).limit(10))
     return jsonify({'result': 'success', 'Stores': store_list})
 
 @app.route('/detail')
