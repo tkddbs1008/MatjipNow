@@ -1,3 +1,100 @@
+/*.section {*/
+/*    padding: 1rem 1.5rem;*/
+/*    max-width: 750px;*/
+/*    margin: auto;*/
+/*}*/
+
+/*.is-sparta {*/
+/*    color: #e8344e !important;*/
+/*}*/
+
+/*.button.solid {*/
+/*    background-color: black;*/
+/*    border-color: transparent;*/
+/*    color: #fff !important;*/
+/*}*/
+
+/*.button.solid.is-outlined {*/
+/*    background-color: transparent;*/
+/*    border-color: black;*/
+/*    color: black !important;*/
+/*}*/
+
+/*.modal-content {*/
+/*    width: 600px;*/
+/*    max-width: 80%;*/
+/*}*/
+
+/*input::-webkit-calendar-picker-indicator {*/
+/*    display: none;*/
+/*}*/
+
+/*.image img {*/
+/*    object-fit: cover;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
+
+/*.nav {*/
+/*    background-color: black;*/
+/*    width: 100%;*/
+/*    color: white;*/
+/*    height: 50px;*/
+/*    margin-top: 10px;*/
+/*    display: inline-block;*/
+/*}*/
+
+/*.subtitle {*/
+/*    float: right;*/
+/*    margin: 15px;*/
+/*    color: white;*/
+/*    font-size: 18px;*/
+
+/*}*/
+
+/*.btn-outline-light {*/
+/*    float: right;*/
+/*    margin-right: 100px;*/
+/*    margin-top: 6px*/
+/*}*/
+
+/*.logo {*/
+/*    width: 200px;*/
+/*    height: 50px;*/
+/*    float: left;*/
+/*    font-size: 40px;*/
+/*    margin: 0px 0px 0px 250px;*/
+/*    padding-top: 4px;*/
+/*    font-family: 'Black Han Sans', sans-serif;*/
+
+/*.background {*/
+/*    background-color: black;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
+
+/*.cover {*/
+/*    background-color: gray;*/
+/*    height: 300px;*/
+/*    margin-top: 10px;*/
+/*    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("https://wallpapersmug.com/download/1920x1080/ddcbbf/food-pizza-baking.jpg");*/
+/*    background-repeat: no-repeat;*/
+/*    background-position: center;*/
+/*    background-size: cover;*/
+/*}*/
+
+/*.filter {*/
+/*    background-color: aquamarine;*/
+/*    width: 1000px;*/
+/*    height: 300px;*/
+/*    margin: auto;*/
+/*    margin-top: 20px;*/
+/*}*/
+
+/*.mycards{*/
+
+/*}*/
+/*}*/
 .section {
     padding: 1rem 1.5rem;
     max-width: 750px;
@@ -66,6 +163,7 @@ input::-webkit-calendar-picker-indicator {
     margin: 0px 0px 0px 250px;
     padding-top: 4px;
     font-family: 'Black Han Sans', sans-serif;
+}
 
 .background {
     background-color: black;
@@ -87,11 +185,33 @@ input::-webkit-calendar-picker-indicator {
     background-color: aquamarine;
     width: 1000px;
     height: 300px;
-    margin: auto;
+
     margin-top: 20px;
+    margin-bottom: 100px;
 }
 
-.mycards{
+.mycards {
 
 }
+
+#map {
+    width: 450px;
+    height: 450px;
+    display: inline-block;
+
+
 }
+
+.image {
+    background-color: gray;
+    width: 400px;
+    height: 400px;
+    display: inline-block;
+}
+
+
+.contentcontainer {
+    margin: 35px auto 25px 5px;
+    float: left;
+}
+

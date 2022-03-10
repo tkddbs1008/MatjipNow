@@ -57,26 +57,60 @@
         margin-top: 20px;
     }
 </style>
-    <script>
-        $(document).ready(function () {
-            listing();
-        });
+<script>
+    var local = ''
+    var category = ''
 
-        function listing() {
+    function tag1(c) {
+        // let local_keyword = $('#button1').val();
+
+        local = c
+        console.log(c)
+        return local
+    }
+
+    function tag2(c) {
+        category = c
+        console.log(c)
+        return category
+    }
+
+    function search() {
+        a = local
+        b = category
+        console.log(a)
+        console.log(b)
+        if (a != '' && b != '') {
             $.ajax({
-                type: 'GET',
-                url: '/index',
-                data: {},
+                type: "POST",
+                url: "/index",
+                data: {local: a, category: b},
                 success: function (response) {
-                    let rows = response['Stores']
-                    for (let i = 0; i < rows.length; i++) {
-                        let store = rows[i]
-                        let storename = rows[i]['StoreName']
-                        let address = rows[i]['Adress']
-                        let star = rows[i]['StorePoint']
-                        let image = rows[i]['thumnail']
+                    console.log(a)
+                    console.log(b)
+                    console.log(response)
+                }
+            })
 
-                        let temp_html = `<div class="col">
+
+        }
+    }
+
+    function listing() {
+        $.ajax({
+            type: 'GET',
+            url: '/index',
+            data: {},
+            success: function (response) {
+                let rows = response['Stores']
+                for (let i = 0; i < rows.length; i++) {
+                    let store = rows[i]
+                    let storename = rows[i]['StoreName']
+                    let address = rows[i]['Adress']
+                    let star = rows[i]['StorePoint']
+                    let image = rows[i]['thumnail']
+
+                    let temp_html = `<div class="col">
                                             <a href="/detail/${store['Num']}"><div class="card h-100">
                                                 <img src="${image}"
                                                      class="card-img-top">
@@ -89,13 +123,16 @@
                                             </div></a>
                                         </div>`
 
-                        $('#cards-box').append(temp_html)
-                    }
+                    $('#cards-box').append(temp_html)
                 }
-            })
-        }
+            }
+        })
+    }
 
-    </script>
+    $(document).ready(function () {
+        listing();
+    });
+</script>
 <body>
 <div class="nav">
     <a><h3 class="logo" onclick="window.location.href='/'">맛집NOW</h3></a>
@@ -105,7 +142,39 @@
 <div class="cover">
     <p>이미지안의 글</p>
 </div>
-<div class="filter"></div>
+<h1>필터</h1>
+<div class="Set_filter">
+    <div class="filter-item">
+        <label class="strong_tag">+지역</label>
+        <p class="local_tag">
+            <!--                    <a href="#" target="_self" role="button" aria-pressed="true">한식</a>-->
+            <!--                    <input type="radio" id ="local01" name="local" >-->
+            <a class="btn btn-danger" onclick="tag1('강남')" href="#" role="button" id="button1">#강남</a>
+            <a class="btn btn-primary" onclick="tag1('홍대')" href="#" role="button" id="button2">#홍대</a>
+            <a class="btn btn-primary" onclick="tag1('건대')" href="#" role="button" id="button3">#건대</a>
+            <a class="btn btn-primary" onclick="tag1('종로')" href="#" role="button" id="button4">#종로</a>
+            <a class="btn btn-primary" onclick="tag1('신림')" href="#" role="button" id="button5">#신림</a>
+            <a class="btn btn-primary" onclick="tag1('노원')" href="#" role="button" id="button6">#노원</a>
+        </p>
+
+    </div>
+    <div class="filter-item">
+        <label class="strong_tag">+지역</label>
+        <p class="local_tag">
+            <!--                    <a href="#" target="_self" role="button" aria-pressed="true">한식</a>-->
+            <a class="btn btn-primary" onclick="tag2('한식')" href="#" role="button" id="button7">#한식</a>
+            <a class="btn btn-primary" onclick="tag2('양식')" href="#" role="button" id="button8">#양식</a>
+            <a class="btn btn-primary" onclick="tag2('일식')" href="#" role="button" id="button9">#일식</a>
+            <a class="btn btn-primary" onclick="tag2('중식')" href="#" role="button" id="button10">#중식</a>
+        </p>
+
+    </div>
+
+    <button id="search" onclick="search()">필터 적용</button>
+</div>
+
+
+</div>
 <div class="mycards">
     <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
     </div>

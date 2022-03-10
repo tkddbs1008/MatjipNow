@@ -1,23 +1,24 @@
- $(document).ready(function () {
-        detail_listing();
-            });
-    function detail_listing() {
-        let currenturl = window.location.href
-        let divided = currenturl.split("/")
-        let N = divided[4]
+$(document).ready(function () {
+    detail_listing();
+});
 
-        $.ajax({
-            type: 'GET',
-            url: '/index',
-            data: {},
-            success: function (response) {
-                let rows = response['Stores']
-                let storename = rows[N - 1]['StoreName']
-                let address = rows[N - 1]['Adress']
-                let star = rows[N - 1]['StorePoint']
-                let image = rows[N - 1]['thumnail']
+function detail_listing() {
+    let currenturl = window.location.href
+    let divided = currenturl.split("/")
+    let N = divided[4]
 
-                let temp_html = `<div class="col">
+    $.ajax({
+        type: 'GET',
+        url: '/index',
+        data: {},
+        success: function (response) {
+            let rows = response['Stores']
+            let storename = rows[N - 1]['StoreName']
+            let address = rows[N - 1]['Adress']
+            let star = rows[N - 1]['StorePoint']
+            let image = rows[N - 1]['thumnail']
+
+            let temp_html = `<div class="col">
                                             <div class="card h-100">
                                                 <img src="${image}"
                                                      class="card-img-top">
@@ -28,12 +29,13 @@
                                                 </div>
                                             </div>
                                         </div>`
-                $('#cards-box').append(temp_html)
+            $('#cards-box').append(temp_html)
 
-            }
-        })
-    }
-    function toggle_like(post_id, type) {
+        }
+    })
+}
+
+function toggle_like(post_id, type) {
     console.log(post_id, type)
     let $a_like = $(`#${post_id} a[aria-label='heart']`)
     let $i_like = $a_like.find("i")
@@ -124,6 +126,8 @@ function num2str(count) {
     return count
 }
 
+
+
 function get_posts() {
     let currenturl = window.location.href
     let divided = currenturl.split("/")
@@ -136,13 +140,15 @@ function get_posts() {
             if (response["result"] == "success") {
                 let posts = response["posts"]
                 for (let i = 0; i < posts.length; i++) {
+                    let user = $("#user__name").text()
                     let post = posts[i]
                     let time_post = new Date(post["date"])
                     let time_before = time2str(time_post)
                     let class_heart = post['heart_by_me'] ? "fa-heart" : "fa-heart-o"
                     let count_heart = post['count_heart']
-                    if (post['Id'] == N) {
-                     let html_temp = `<div class="box" id="${post["_id"]}">
+                    let ID = post["_id"]
+                    if (post['Id'] == N ) {
+                        let html_temp = `<div class="box" id="${ID}">
                                         <article class="media">
                                             <div class="media-left">
                                                 <a class="image is-64x64" href="/user/${post['username']}">
@@ -158,6 +164,7 @@ function get_posts() {
                                                         ${post['comment']}
                                                     </p>
                                                 </div>
+                                                
                                                 <nav class="level is-mobile">
                                                     <div class="level-left">
                                                         <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${post['_id']}', 'heart')">
@@ -169,10 +176,9 @@ function get_posts() {
                                             </div>
                                         </article>
                                     </div>`
-
-
-                    $("#post-box").append(html_temp)
-                }}
+                        $("#post-box").append(html_temp)
+                    }
+                }
             }
         }
     })

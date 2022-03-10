@@ -1,10 +1,13 @@
 import jwt
 import datetime
 import hashlib
+
+import requests
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 from pymongo import MongoClient
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -14,6 +17,41 @@ SECRET_KEY = 'SPARTA'
 
 client = MongoClient('mongodb+srv://test:sparta@cluster0.07mbu.mongodb.net/Cluster0?retryWrites=true&w=majority')
 db = client.dbStore
+
+#------주소 입력받고 좌표값으로 변환-----
+# 지도는 localhost:5000으로 접속하셔야 합니다.
+headers = {
+    "X-NCP-APIGW-API-KEY-ID": "s76fz5795p",
+    "X-NCP-APIGW-API-KEY": "slSZ5BKsgMyGfrEp7LFXW8UcaQ7VZpTgW0mMAzHl"
+}
+
+
+
+
+all_users = list(db.Store.find({},{'_id':False}))
+###Store에서 불러온 주소값으로 xy값을 얻은 후 xy테이블에 Num과 함께 저장###
+for i in all_users:
+    n = i['Num']
+    address = i['Adress']
+    r = requests.get(f"https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query={address}", headers=headers)
+    response = r.json()
+    if response["status"] == "OK":
+        if len(response["addresses"]) > 0:
+            x = float(response["addresses"][0]["x"])
+            y = float(response["addresses"][0]["y"])
+        else:
+            print("좌표를 찾지 못했습니다")
+    else:
+        print(response["status"])
+    doc = {'Num':n,'x':x,'y':y}
+    db.xy.delete_one({'Num':n})
+    db.xy.insert_one(doc)
+
+all_users2 = list(db.xy.find({},{'_id':False}))
+for x in all_users2:
+    print(x)
+
+
 
 @app.route('/')
 def home():
@@ -27,6 +65,66 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+@app.route('/index', methods=['POST'])
+def main_post():
+    category = request.form['category']
+    local = request.form['local']
+    print(category)
+    print(local)
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    data = requests.get(f'https://www.mangoplate.com/search/{local}%20{category}',headers=headers)
+    soup = BeautifulSoup(data.text,'html.parser')
+
+    titles = soup.select('body > main > article > div.column-wrapper > div > div > section > div.search-list-restaurants-inner-wrap > ul > li')
+
+
+    for title in titles:
+        store_list = list(db.Store.find({}, {'_id': False}))
+        count = len(store_list) + 1
+        store_name = title.select_one('div > figure > figcaption > div > a > h2')
+        store_name = store_name.text.split('\n')[0]
+        store_point = title.select_one('div > figure > figcaption > div > strong').text
+        review_point = title.select_one('div > figure > figcaption > div > p.etc_info > span.review_count.ng-binding')
+        img_thumnail = title.select_one('div > figure > a > div > img')['data-original'].split(';')[0]
+
+        print(type(store_name))
+        print(store_name)
+        detail_link = title.select_one('div > figure > a')['href']
+        detail_link = 'https://www.mangoplate.com' + detail_link
+        # print(detail_link)
+        print(img_thumnail)
+        print(str(count) + '번째 음식점 이름: ' + store_name + '\n평점:' + store_point)
+        data1 = requests.get(detail_link, headers=headers)
+        soup1 = BeautifulSoup(data1.text, 'html.parser')
+        Address = soup1.select_one(
+            'body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(1) > td').text.split(
+            '\n')[0]
+        PhoneNum = soup1.select_one(
+            'body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(2) > td').text
+        Food_Category = soup1.select_one(
+            'body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(3) > td > span').text
+        Parking = soup1.select_one(
+            'body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(5) > td').text
+        print('주소:' + Address + '\n전화번호: ' + PhoneNum + '\n음식 종류:' + Food_Category + '\n주차 여부:' + Parking)
+        #body > main > article > div.column - wrapper > div.column - contents > div > section.restaurant - detail > table > tbody > tr: nth - child(2) > td > span
+        print('=============')
+        doc = {
+            'Num': count,
+            'StoreName': store_name,
+            'StorePoint': store_point,
+            'PhoneNum': PhoneNum,
+            'Adress': Address,
+            'FoodCategory': Food_Category,
+            'Parking': Parking,
+            'thumnail': img_thumnail,
+            'LocalTag': local,
+            'FoodTag': category
+        }
+        db.Store.insert_one(doc)
+
+    return jsonify({'result':'success','msg':'요청확인'})
 @app.route("/index", methods=["GET"])
 def store_get():
     store_list = list(db.Store.find({}, {'_id': False}))
