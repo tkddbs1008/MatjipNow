@@ -48,7 +48,7 @@
 
 
             let map = new naver.maps.Map('map', {
-                center: new naver.maps.LatLng(Number({{numlist[index-1]['y']}}), Number({{numlist[index-1]['x']}})),
+                center: new naver.maps.LatLng(Number({{xyxy['y']}}), Number({{xyxy['x']}})),
                 zoom: 15,
                 zoomControl: true,
                 zoomControlOptions: {
@@ -58,7 +58,7 @@
             });
 
             let marker = new naver.maps.Marker({
-                position: new naver.maps.LatLng(Number({{numlist[index-1]['y']}}), Number({{numlist[index-1]['x']}})),
+                position: new naver.maps.LatLng(Number({{xyxy['y']}}), Number({{xyxy['x']}})),
                 map: map
             });
 

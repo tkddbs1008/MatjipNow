@@ -24,12 +24,14 @@ headers = {
     "X-NCP-APIGW-API-KEY-ID": "s76fz5795p",
     "X-NCP-APIGW-API-KEY": "slSZ5BKsgMyGfrEp7LFXW8UcaQ7VZpTgW0mMAzHl"
 }
+#기존 좌표 db 지우기
+all_users2 = list(db.xy.find({},{'_id':False}))
+for i in all_users2:
+    n=i['Num']
+    db.xy.delete_one({'Num': n})
 
-
-
-
-all_users = list(db.Store.find({},{'_id':False}))
 ###Store에서 불러온 주소값으로 xy값을 얻은 후 xy테이블에 Num과 함께 저장###
+all_users = list(db.Store.find({},{'_id':False}))
 for i in all_users:
     n = i['Num']
     address = i['Adress']
@@ -46,10 +48,10 @@ for i in all_users:
     doc = {'Num':n,'x':x,'y':y}
     db.xy.delete_one({'Num':n})
     db.xy.insert_one(doc)
-
-all_users2 = list(db.xy.find({},{'_id':False}))
-for x in all_users2:
-    print(x)
+# #좌표 잘 들어갔나 확인용
+#all_users2 = list(db.xy.find({},{'_id':False}))
+# for x in all_users2:
+#     print(x)
 
 
 
@@ -148,7 +150,8 @@ def store(idNum):
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"username": payload["id"]})
         store_info = db.Store.find_one({"Num": idNum}, {"_id": False})
-        return render_template('detail.html', user_info=user_info, store_info=store_info)
+        xyxy = db.xy.find_one({'Num': int(idNum)})
+        return render_template('detail.html', user_info=user_info, store_info=store_info,xyxy=xyxy)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
